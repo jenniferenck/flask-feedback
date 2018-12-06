@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    New User Registration Page
+    Form for adding/editing user feedback
 {% endblock %}
 
 {% block header %}
-<h1 class="display-4">Register</h1>
+<h1 class="display-4">{{ action }} Feedback</h1>
 {% endblock %}
 
 {% block content %}
 
-<p class="lead">Register for our site.</p>
+<p class="lead">Add your feedback for whatever.</p>
 
 <form method="POST">
 
@@ -28,7 +28,9 @@
   </p>
   {% endfor %}
 
-  <button type="submit">Register</button>
+  <a href="/users/{{ session.username }}">
+    <button type="button">Cancel</button></a>
+  <button type="submit">{{ action }} Feedback</button>
 
 </form>
 

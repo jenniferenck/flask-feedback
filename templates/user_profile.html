@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Secret Page
+{% endblock %}
+
+{% block header %}
+<h1 class="display-4">{{ user.first_name }} {{ user.last_name }} Profile</h1>
+{% endblock %}
+
+{% block content %}
+
+<h2>Some obvious info:</h2>
+
+<ul>
+    <li>Username: {{ user.username }}</li>
+    <li>Email: {{ user.email }}</li>
+</ul>
+
+<form action="/users/{{ user.username }}/delete" method="post"> <button class="btn-danger">Delete User Profile</button> </form>
+
+<h2>Feedback Posts:</h2>
+
+<ul>
+    {% for feedback in feedbacks %}
+    
+    <li>
+        <!-- Look into other format types - currently needs to be a form to execute the page -->
+        <form action="/feedback/{{ feedback.id }}/update" method="GET">
+            <h3>{{ feedback.title }}<span>
+                <button type="submit"  class="btn btn-link btn-sm">Edit</button>
+                </span>
+            </h3>
+        </form>
+    <p>{{ feedback.content }}</p> 
+    <form action="/feedback/{{ feedback.id }}/delete" method="POST">
+        <button type="submit"  class="btn btn-link btn-danger btn-sm">Delete this Post</button>
+    </form>
+       
+    </li>
+    
+    {% endfor %}
+</ul>
+
+<form action="/users/{{ user.username }}/feedback/add">
+    <button type="submit">Add Feedback</button>
+</form>
+
+{% endblock %}
